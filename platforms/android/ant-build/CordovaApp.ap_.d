@@ -39,6 +39,9 @@
 /Users/haslo/cordova/TowerLines/platforms/android/assets/www/resources/img \
 /Users/haslo/cordova/TowerLines/platforms/android/assets/www/resources/js \
 /Users/haslo/cordova/TowerLines/platforms/android/assets/www/resources/css/screen.css \
+/Users/haslo/cordova/TowerLines/platforms/android/assets/www/resources/css/style.css \
+/Users/haslo/cordova/TowerLines/platforms/android/assets/www/resources/img/phaser.png \
 /Users/haslo/cordova/TowerLines/platforms/android/assets/www/resources/js/index.js \
 /Users/haslo/cordova/TowerLines/platforms/android/assets/www/resources/js/main.js \
+/Users/haslo/cordova/TowerLines/platforms/android/assets/www/vendors/phaser.min.js \
 /Users/haslo/cordova/TowerLines/platforms/android/ant-build/AndroidManifest.xml \

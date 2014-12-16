@@ -2,12 +2,26 @@
 (function() {
   this.app = {
     initialize: function() {
-      this.bindEvents();
+      return this.bindEvents();
     },
     bindEvents: function() {
-      document.addEventListener("deviceready", this.onDeviceReady, false);
+      return document.addEventListener("deviceready", this.onDeviceReady, false);
     },
-    onDeviceReady: function() {}
+    onDeviceReady: function() {
+      var create, game, preload;
+      preload = function() {
+        return game.load.image("logo", "resources/img/phaser.png");
+      };
+      create = function() {
+        var logo;
+        logo = game.add.sprite(game.world.centerX, game.world.centerY, "logo");
+        return logo.anchor.setTo(0.5, 0.5);
+      };
+      return game = new Phaser.Game(800, 600, Phaser.AUTO, "", {
+        preload: preload,
+        create: create
+      });
+    }
   };
 
 }).call(this);
