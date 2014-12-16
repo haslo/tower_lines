@@ -27,7 +27,6 @@
 /Users/haslo/cordova/TowerLines/platforms/android/ant-build/res/drawable-port-mdpi/screen.png \
 /Users/haslo/cordova/TowerLines/platforms/android/ant-build/res/drawable-port-xhdpi/screen.png \
 /Users/haslo/cordova/TowerLines/platforms/android/ant-build/res/drawable-xhdpi/icon.png \
-/Users/haslo/cordova/TowerLines/platforms/android/assets/_where-is-www.txt \
 /Users/haslo/cordova/TowerLines/platforms/android/assets/www \
 /Users/haslo/cordova/TowerLines/platforms/android/assets/www/cordova.js \
 /Users/haslo/cordova/TowerLines/platforms/android/assets/www/cordova_plugins.js \

@@ -8,7 +8,7 @@
       return document.addEventListener("deviceready", this.onDeviceReady, false);
     },
     onDeviceReady: function() {
-      var create, game, preload;
+      var create, game, height, preload, width;
       preload = function() {
         return game.load.image("logo", "resources/img/phaser.png");
       };
@@ -17,7 +17,9 @@
         logo = game.add.sprite(game.world.centerX, game.world.centerY, "logo");
         return logo.anchor.setTo(0.5, 0.5);
       };
-      return game = new Phaser.Game(800, 600, Phaser.AUTO, "", {
+      width = document.body.offsetWidth;
+      height = document.body.offsetHeight;
+      return game = new Phaser.Game(width, height, Phaser.AUTO, "", {
         preload: preload,
         create: create
       });
