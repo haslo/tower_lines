@@ -6,11 +6,11 @@
     %meta{content: "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi", name: "viewport"}/
     %link{href: "resources/css/style.css", rel: "stylesheet", type: "text/css"}/
     %meta{content: "no", name: "msapplication-tap-highlight"}/
-    %title App Name
+    %title TowerLines
   %body
     %script{src: "https://code.jquery.com/jquery-2.1.1.min.js", type: "text/javascript"}
     %script{src: "cordova.js", type: "text/javascript"}
-    %script{src: "resources/js/main.js", type: "text/javascript"}
     %script{src: "vendors/phaser.min.js", type: "text/javascript"}
+    %script{src: "resources/js/main.js", type: "text/javascript"}
     :javascript
-      app.initialize();
+      new TowerLines().initialize();

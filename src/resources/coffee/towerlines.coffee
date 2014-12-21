@@ -1,4 +1,4 @@
-@app =
+class @TowerLines
 
   initialize: ->
     @bindEvents()
@@ -9,11 +9,11 @@
   onDeviceReady: ->
 
     preload = ->
+      game.load.image "mob", "resources/img/mob.png"
       game.load.image "logo", "resources/img/phaser.png"
 
     create = ->
-      logo = game.add.sprite(game.world.centerX, game.world.centerY, "logo")
-      logo.anchor.setTo 0.5, 0.5
+      new TowerSprite().draw game, game.width / 4, game.height / 4, 2
 
     width = document.body.offsetWidth;
     height = document.body.offsetHeight;

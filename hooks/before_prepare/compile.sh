@@ -11,7 +11,7 @@
 
 # Use this to minify all the js into one file (main.js) with
 # the given array order
-javascripts=(index)
+javascripts=(draw_engine sprites maps towerlines)
 
 coffee -c -o www/resources/js/ src/resources/coffee/*.coffee
 coffee -c -o src/tests/spec/js src/tests/spec/coffee/*.coffee
