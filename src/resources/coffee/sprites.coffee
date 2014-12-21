@@ -9,13 +9,18 @@ class Sprite
     root + (coord * scale)
 
 class @TowerSprite extends Sprite
-  draw: (game, x, y, scale) ->
-    shape = @initShape game, 0x0000ff
-    shape.moveTo @relativeCoord(10, x, scale),  @relativeCoord(10, y, scale)
-    shape.lineTo @relativeCoord(-10, x, scale), @relativeCoord(10, y, scale)
-    shape.lineTo @relativeCoord(-8, x, scale),  @relativeCoord(-5, y, scale)
-    shape.lineTo @relativeCoord(-8, x, scale),  @relativeCoord(-10, y, scale)
-    shape.lineTo @relativeCoord(8, x, scale),   @relativeCoord(-10, y, scale)
-    shape.lineTo @relativeCoord(8, x, scale),   @relativeCoord(-5, y, scale)
-    shape.lineTo @relativeCoord(10, x, scale),  @relativeCoord(10, y, scale)
+  constructor: (x, y) ->
+    @x = x
+    @y = y
+
+  draw: (game, map) ->
+    shape = @initShape(game, 0x0000ff)
+    scale = map.calculateScale()
+    c = map.mapCoords( 10 + @x,  10 + @y); shape.moveTo(c[0], c[1])
+    c = map.mapCoords(-10 + @x,  10 + @y); shape.lineTo(c[0], c[1])
+    c = map.mapCoords(- 8 + @x, - 5 + @y); shape.lineTo(c[0], c[1])
+    c = map.mapCoords(- 8 + @x, -10 + @y); shape.lineTo(c[0], c[1])
+    c = map.mapCoords(  8 + @x, -10 + @y); shape.lineTo(c[0], c[1])
+    c = map.mapCoords(  8 + @x, - 5 + @y); shape.lineTo(c[0], c[1])
+    c = map.mapCoords( 10 + @x,  10 + @y); shape.lineTo(c[0], c[1])
     shape.endFill

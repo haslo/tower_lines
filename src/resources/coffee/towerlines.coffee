@@ -12,8 +12,9 @@ class @TowerLines
       AndroidFullScreen.immersiveMode($.noop, $.noop)
 
     create = ->
-      new DefaultMap(game).draw()
-      new TowerSprite().draw(game, game.width / 2, game.height / 2, 2)
+      map = new DefaultMap(game)
+      map.draw()
+      new TowerSprite(30, 30).draw(game, map)
 
     width = document.body.offsetWidth;
     # TODO add AndroidFullScreen, maybe
