@@ -1,16 +1,3 @@
-# Compiles CoffeeScript and Sass
-# Make sure to have the folowing Structure
-# src
-#   - coffee
-#   - sass
-# www
-#   - js
-#   - css
-#
-# unless you used cinit.sh
-
-# Use this to minify all the js into one file (main.js) with
-# the given array order
 javascripts=(draw_engine sprites maps towerlines)
 
 coffee -c -o www/resources/js/ src/resources/coffee/*.coffee

@@ -13,10 +13,12 @@ class @TowerLines
       game.load.image "logo", "resources/img/phaser.png"
 
     create = ->
-      new TowerSprite().draw game, game.width / 4, game.height / 4, 2
+      new DefaultMap().draw(game)
+      new TowerSprite().draw(game, game.width / 2, game.height / 2, 2)
 
     width = document.body.offsetWidth;
-    height = document.body.offsetHeight;
+    height = Math.max($(document).height(), $(window).height());
+    console.log [width, height]
     game = new Phaser.Game(width, height, Phaser.AUTO, "",
       preload: preload
       create: create
