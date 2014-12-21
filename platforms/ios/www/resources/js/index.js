@@ -1,1 +1,0 @@
-(function(){this.app={initialize:function(){this.bindEvents()},bindEvents:function(){document.addEventListener("deviceready",this.onDeviceReady,!1)},onDeviceReady:function(){}}}).call(this);
