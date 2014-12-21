@@ -1,0 +1,12 @@
+ToDos
+===
+
+✓ * Get sprites to draw at all
+✓ * Get map working (drawing left-half or center, knowing its coordinates)
+  * Get sprites to draw on map (with relative coords and scaling)
+  * Build structures for map knowledge (position and direction of towers and mobs)
+  * Get engine to redraw instead of just draw, prepare for animation, screen resizes, reloads
+  * Build pathing algorithms for mobs, get mobs to walk
+  * Implement basic shots with basic collision detection (point-based)
+  * Add state to mobs beyond position and class (health, mostly) and make them die when hit hard enough
+  * Display health bars for mobs

@@ -1,0 +1,8 @@
+Symmetrisches CCG-Tower-Defense
+
+Angriff: Schicke Truppen, Tanks, Heiler, DDs, Schwärme, Bosse, Katapult gegen Türme
+Verteidigung: Baue Türme (Archer Mage Area Barracks ananlog Kingdum Rush) und Upgrades, Ballista gegen Katapult, schalte Pfade frei
+Ressourcen: Baubare Beschleunigung, abhängig von Standort oder pauschal, sonst fix pro Runde (analog Mage Wars), alles kostet Ressourcen
+Karten: Braucht es um irgend etwas zu bauen, Deck vor Start, analog Irondingsda
+Ablauf, Variante 1: Rundenbasiert, pro Runde 1 Karte nachziehen (evtl. modifizierbar), beliebig Karten spielen mit Ressourcen
+Ablauf, Variante 2: Freischalten von Karten, aber danach Programmierung von Ablauf durch Karten, mit Möglichkeit (Primär-Spielart) für PvP. Limitierter Zufall, aber via Server gesteuert

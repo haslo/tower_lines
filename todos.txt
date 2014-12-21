@@ -1,6 +1,0 @@
-ToDos
-===
-
-✓ 1) Get sprites to draw at all
-  2) Get map working (drawing left-half or center, knowing its coordinates)
-  3) Get sprites to draw on map
