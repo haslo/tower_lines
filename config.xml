@@ -10,4 +10,9 @@
     <content src="index.html" />
     <access origin="*" />
     <preference name="Fullscreen" value="true" />
+    <icon src="www/resources/img/icon.png" />
+    <icon src="www/resources/img/icon.png" platform="android" density="ldpi" />
+    <icon src="www/resources/img/icon.png" platform="android" density="mdpi" />
+    <icon src="www/resources/img/icon.png" platform="android" density="hdpi" />
+    <icon src="www/resources/img/icon.png" platform="android" density="xhdpi" />
 </widget>
