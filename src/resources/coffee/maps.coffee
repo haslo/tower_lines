@@ -45,24 +45,17 @@ class Map
 
   mapCoords: (x, y) ->
     @mappers ||= {}
+    width = if (@game.width > @game.height) then (@game.width / 2) else @game.width
+    height = @game.height
+    actualAspectRatio = width / height
     if @mappers[['x', @width, @height]] is undefined
-      width = if (@game.width > @game.height) then (@game.width / 2) else @game.width
-      height = @game.height
-      actualAspectRatio = width / height
       originX = if (actualAspectRatio > @aspectRatio) then ((width - (height * @aspectRatio)) / 2 + @offset) else @offset
       scaleX = @calculateScale()
-      @mappers[['x', @width, @height]] = (x) ->
-                console.log 'x: ' + originX
-                originX + x * scaleX
+      @mappers[['x', @width, @height]] = (x) -> originX + x * scaleX
     if @mappers[['y', @width, @height]] is undefined
-      width = if (@game.width > @game.height) then (@game.width / 2) else @game.width
-      height = @game.height
-      actualAspectRatio = width / height
       originY = if (actualAspectRatio > @aspectRatio) then @offset else ((height - (width / @aspectRatio)) / 2 + @offset)
       scaleY = @calculateScale()
-      @mappers[['y', @width, @height]] = (y) ->
-                console.log 'y:' + originY
-                originY + y * scaleY
+      @mappers[['y', @width, @height]] = (y) -> originY + y * scaleY
     [@mappers[['x', @width, @height]](x), @mappers[['y', @width, @height]](y)]
 
   calculateScale: ->
