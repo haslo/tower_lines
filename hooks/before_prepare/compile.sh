@@ -1,4 +1,4 @@
-javascripts=(draw_engine sprites maps tower_lines)
+javascripts=(draw_engine sprites maps towers mobs wrold tower_lines)
 
 coffee -c -o www/resources/js/ src/resources/coffee/*.coffee
 coffee -c -o src/tests/spec/js src/tests/spec/coffee/*.coffee

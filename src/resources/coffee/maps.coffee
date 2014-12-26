@@ -1,4 +1,4 @@
-class Map
+class @Map
   constructor: (game, borderColor, width, height) ->
     @game = game
     @borderColor = borderColor
@@ -6,6 +6,9 @@ class Map
     @height = height
     @aspectRatio = @width / @height
     @offset = 5
+
+  update: ->
+    $.noop
 
   getGraphics: ->
     @graphics

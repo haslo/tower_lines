@@ -1,0 +1,3 @@
+class @Mob
+  update: ->
+    $.noop
