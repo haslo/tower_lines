@@ -17,9 +17,9 @@ class @TowerLines
       @resizeGame(this)
 
   createListener: =>
-    console.log 'listening'
-    @map ||= new DefaultMap(@game)
-    @map.draw()
+    @world = new World(new DefaultMap(@game))
+    @world.add(new DefaultTower(30, 30))
+    @world.draw()
 
   resizeGame: =>
     height = $(window).height()
@@ -30,4 +30,4 @@ class @TowerLines
     @game.stage.bounds.height = height
     if @game.renderType is Phaser.WEBGL
       @game.renderer.resize width, height
-    @map.draw()
+    @world.draw()

@@ -33,9 +33,9 @@
     };
 
     TowerLines.prototype.createListener = function() {
-      console.log('listening');
-      this.map || (this.map = new DefaultMap(this.game));
-      return this.map.draw();
+      this.world = new World(new DefaultMap(this.game));
+      this.world.add(new DefaultTower(30, 30));
+      return this.world.draw();
     };
 
     TowerLines.prototype.resizeGame = function() {
@@ -49,7 +49,7 @@
       if (this.game.renderType === Phaser.WEBGL) {
         this.game.renderer.resize(width, height);
       }
-      return this.map.draw();
+      return this.world.draw();
     };
 
     return TowerLines;

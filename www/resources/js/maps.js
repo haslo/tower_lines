@@ -25,11 +25,11 @@
       this.graphics || (this.graphics = this.game.add.graphics(0, 0));
       this.graphics.lineStyle(4, this.borderColor, 1);
       this.graphics.beginFill(this.borderColor, 0.1);
-      this.graphics.moveTo(this.translateXCoord(this.width, this.height, this.offset), this.translateYCoord(this.width, this.height, this.offset));
-      this.graphics.lineTo(this.translateXCoord(this.width, this.height, this.width - this.offset), this.translateYCoord(this.width, this.height, this.offset));
-      this.graphics.lineTo(this.translateXCoord(this.width, this.height, this.width - this.offset), this.translateYCoord(this.width, this.height, this.height - this.offset));
-      this.graphics.lineTo(this.translateXCoord(this.width, this.height, this.offset), this.translateYCoord(this.width, this.height, this.height - this.offset));
-      this.graphics.lineTo(this.translateXCoord(this.width, this.height, this.offset), this.translateYCoord(this.width, this.height, this.offset));
+      this.graphics.moveTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
+      this.graphics.lineTo(this.translateXCoord(this.width - this.offset), this.translateYCoord(this.offset));
+      this.graphics.lineTo(this.translateXCoord(this.width - this.offset), this.translateYCoord(this.height - this.offset));
+      this.graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.height - this.offset));
+      this.graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
       return this.graphics.endFill();
     };
 
@@ -39,19 +39,19 @@
       }
     };
 
-    Map.prototype.fitSizeIntoCoords = function(width, height) {
-      return [this.translateXCoord(width, height, 0), this.translateYCoord(width, height, 0), this.translateXCoord(width, height, width), this.translateYCoord(width, height, height)];
+    Map.prototype.translateCoords = function(x, y) {
+      return [this.translateXCoord(x), this.translateYCoord(y)];
     };
 
-    Map.prototype.translateXCoord = function(width, height, coord) {
-      return coord * this.calculateScale() + (this.pixelWidth() - width * this.calculateScale()) / 2;
+    Map.prototype.translateXCoord = function(coord) {
+      return coord * this.pixelScale() + (this.pixelWidth() - this.width * this.pixelScale()) / 2;
     };
 
-    Map.prototype.translateYCoord = function(width, height, coord) {
-      return coord * this.calculateScale() + (this.pixelHeight() - height * this.calculateScale()) / 2;
+    Map.prototype.translateYCoord = function(coord) {
+      return coord * this.pixelScale() + (this.pixelHeight() - this.height * this.pixelScale()) / 2;
     };
 
-    Map.prototype.calculateScale = function() {
+    Map.prototype.pixelScale = function() {
       var actualAspectRatio;
       actualAspectRatio = this.pixelWidth() / this.pixelHeight();
       if (actualAspectRatio > this.aspectRatio) {

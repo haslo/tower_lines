@@ -9,13 +9,13 @@
 
     Sprite.prototype.moveTo = function(map, x, y) {
       var coords;
-      coords = map.mapCoords(x + this.x, y + this.y);
+      coords = map.translateCoords(x + this.x, y + this.y);
       return map.getGraphics().moveTo(coords[0], coords[1]);
     };
 
     Sprite.prototype.lineTo = function(map, x, y) {
       var coords;
-      coords = map.mapCoords(x + this.x, y + this.y);
+      coords = map.translateCoords(x + this.x, y + this.y);
       return map.getGraphics().lineTo(coords[0], coords[1]);
     };
 
@@ -32,8 +32,7 @@
     }
 
     TowerSprite.prototype.draw = function(map) {
-      var color, scale;
-      scale = map.calculateScale();
+      var color;
       color = 0x0000ff;
       map.getGraphics().lineStyle(2, color, 1);
       map.getGraphics().beginFill(color, 0.4);

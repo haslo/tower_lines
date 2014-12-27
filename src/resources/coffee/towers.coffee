@@ -1,11 +1,9 @@
 class @Tower
-  update: ->
-    $.noop
-
-class @DefaultTower
-  constructor: (x, y) ->
+  constructor: (x, y, map) ->
     @x = x
     @y = y
+    @map = map
 
+class @DefaultTower extends Tower
   draw: (map) ->
-    new TowerSprite(x, y).draw(map)
+    new TowerSprite(@x, @y).draw(map)

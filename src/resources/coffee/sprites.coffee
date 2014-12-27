@@ -1,10 +1,10 @@
 class Sprite
   moveTo: (map, x, y) ->
-    coords = map.mapCoords(x + @x, y + @y)
+    coords = map.translateCoords(x + @x, y + @y)
     map.getGraphics().moveTo(coords[0], coords[1])
 
   lineTo: (map, x, y) ->
-    coords = map.mapCoords(x + @x, y + @y)
+    coords = map.translateCoords(x + @x, y + @y)
     map.getGraphics().lineTo(coords[0], coords[1])
 
 class @TowerSprite extends Sprite
@@ -13,7 +13,6 @@ class @TowerSprite extends Sprite
     @y = y
 
   draw: (map) ->
-    scale = map.calculateScale()
     color = 0x0000ff
     map.getGraphics().lineStyle(2, color, 1)
     map.getGraphics().beginFill(color, 0.4)

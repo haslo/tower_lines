@@ -17,34 +17,32 @@ class @Map
     @graphics ||= @game.add.graphics(0, 0)
     @graphics.lineStyle 4, @borderColor, 1
     @graphics.beginFill @borderColor, 0.1
-    @graphics.moveTo @translateXCoord(@width, @height, @offset),
-                     @translateYCoord(@width, @height, @offset)
-    @graphics.lineTo @translateXCoord(@width, @height, @width - @offset),
-                     @translateYCoord(@width, @height, @offset)
-    @graphics.lineTo @translateXCoord(@width, @height, @width - @offset),
-                     @translateYCoord(@width, @height, @height - @offset)
-    @graphics.lineTo @translateXCoord(@width, @height, @offset),
-                     @translateYCoord(@width, @height, @height - @offset)
-    @graphics.lineTo @translateXCoord(@width, @height, @offset),
-                     @translateYCoord(@width, @height, @offset)
+    @graphics.moveTo @translateXCoord(@offset),
+                     @translateYCoord(@offset)
+    @graphics.lineTo @translateXCoord(@width - @offset),
+                     @translateYCoord(@offset)
+    @graphics.lineTo @translateXCoord(@width - @offset),
+                     @translateYCoord(@height - @offset)
+    @graphics.lineTo @translateXCoord(@offset),
+                     @translateYCoord(@height - @offset)
+    @graphics.lineTo @translateXCoord(@offset),
+                     @translateYCoord(@offset)
     @graphics.endFill()
 
   clear: ->
     @graphics.clear() unless @graphics is undefined
 
-  fitSizeIntoCoords: (width, height) ->
+  translateCoords: (x, y) ->
     [
-      @translateXCoord(width, height, 0),
-      @translateYCoord(width, height, 0),
-      @translateXCoord(width, height, width),
-      @translateYCoord(width, height, height)
+      @translateXCoord(x),
+      @translateYCoord(y)
     ]
 
-  translateXCoord: (width, height, coord) ->
-    coord * @pixelScale() + (@pixelWidth() - width * @pixelScale()) / 2
+  translateXCoord: (coord) ->
+    coord * @pixelScale() + (@pixelWidth() - @width * @pixelScale()) / 2
 
-  translateYCoord: (width, height, coord) ->
-    coord * @pixelScale() + (@pixelHeight() - height * @pixelScale()) / 2
+  translateYCoord: (coord) ->
+    coord * @pixelScale() + (@pixelHeight() - @height * @pixelScale()) / 2
 
   pixelScale: ->
     actualAspectRatio = @pixelWidth() / @pixelHeight()

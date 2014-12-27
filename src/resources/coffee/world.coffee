@@ -1,4 +1,4 @@
-class World
+class @World
   constructor: (map) ->
     @map = map
     @towers = []
@@ -13,11 +13,17 @@ class World
       @mobs.push item
 
   update: ->
-    @map.update()
+    map = @map
+    map.update()
     $.each @towers, (_, tower) ->
-      tower.update()
+      tower.update(map)
     $.each @mobs, (_, mob) ->
-      mob.update()
+      mob.update(map)
 
   draw: ->
-    @map.draw()
+    map = @map
+    map.draw()
+    $.each @towers, (_, tower) ->
+      tower.draw(map)
+    $.each @mobs, (_, mob) ->
+      mob.draw(map)
