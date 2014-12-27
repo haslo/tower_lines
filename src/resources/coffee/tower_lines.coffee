@@ -7,7 +7,7 @@ class @TowerLines
     document.addEventListener 'deviceready', @onDeviceReady, false
 
   onDeviceReady: =>
-    width = document.body.offsetWidth;
+    width = document.body.offsetWidth
     height = Math.max($(document).height(), $(window).height())
     listeners = {
       create: @createListener
@@ -30,5 +30,4 @@ class @TowerLines
     @game.stage.bounds.height = height
     if @game.renderType is Phaser.WEBGL
       @game.renderer.resize width, height
-    @map.resize()
     @map.draw()

@@ -5,11 +5,12 @@ ToDos
 ✓ * Get map working (drawing left-half or center, knowing its coordinates)
 ✓ * Get sprites to draw relative to map (with relative coords and scaling)
   * Build structures for map knowledge (position and direction of towers and mobs)
-  * Prepare offscreen rendering and multiple PIXI graphics
   * Get engine to redraw instead of just draw, prepare for animation, screen resizes, reloads
   * Build pathing algorithms for mobs, get mobs to walk
   * Implement basic shots with basic collision detection (point-based)
   * Add state to mobs beyond position and class (health, mostly) and make them die when hit hard enough
   * Display health bars for mobs
+  * Prepare offscreen rendering and multiple PIXI graphics
+  * Use in-engine structures for rendering tree where possible (for optimization)
   * Make it possible to draw images instead of line art
   * Fix pixel scaling for line drawings
