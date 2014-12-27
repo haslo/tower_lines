@@ -44,28 +44,33 @@
     };
 
     Map.prototype.translateXCoord = function(width, height, coord) {
-      var desiredWidth;
-      desiredWidth = height * this.aspectRatio;
-      return (coord - ((width - desiredWidth) / 2)) * this.calculateScale();
+      return coord * this.calculateScale() + (this.pixelWidth() - width * this.calculateScale()) / 2;
     };
 
     Map.prototype.translateYCoord = function(width, height, coord) {
-      var desiredHeight;
-      desiredHeight = width / this.aspectRatio;
-      console.log([coord, width, height, desiredHeight]);
-      return (coord - ((height - desiredHeight) / 2)) * this.calculateScale();
+      return coord * this.calculateScale() + (this.pixelHeight() - height * this.calculateScale()) / 2;
     };
 
     Map.prototype.calculateScale = function() {
-      var actualAspectRatio, height, width;
-      width = this.game.width / (this.game.width > this.game.height ? 2 : 1);
-      height = this.game.height;
-      actualAspectRatio = width / height;
+      var actualAspectRatio;
+      actualAspectRatio = this.pixelWidth() / this.pixelHeight();
       if (actualAspectRatio > this.aspectRatio) {
-        return height / this.height;
+        return this.pixelHeight() / this.height;
       } else {
-        return width / this.width;
+        return this.pixelWidth() / this.width;
       }
+    };
+
+    Map.prototype.pixelWidth = function() {
+      if (this.game.width > this.game.height) {
+        return this.game.width / 2;
+      } else {
+        return this.game.width;
+      }
+    };
+
+    Map.prototype.pixelHeight = function() {
+      return this.game.height;
     };
 
     return Map;

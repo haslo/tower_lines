@@ -41,22 +41,26 @@ class @Map
     ]
 
   translateXCoord: (width, height, coord) ->
-    desiredWidth = height * @aspectRatio
-    (coord - ((width - desiredWidth) / 2)) * @calculateScale()
+    coord * @pixelScale() + (@pixelWidth() - width * @pixelScale()) / 2
 
   translateYCoord: (width, height, coord) ->
-    desiredHeight = width / @aspectRatio
-    console.log [coord, width, height, desiredHeight]
-    (coord - ((height - desiredHeight) / 2)) * @calculateScale()
+    coord * @pixelScale() + (@pixelHeight() - height * @pixelScale()) / 2
 
-  calculateScale: ->
-    width = @game.width / (if (@game.width > @game.height) then 2 else 1)
-    height = @game.height
-    actualAspectRatio = width / height
+  pixelScale: ->
+    actualAspectRatio = @pixelWidth() / @pixelHeight()
     if actualAspectRatio > @aspectRatio
-      height / @height
+      @pixelHeight() / @height
     else
-      width / @width
+      @pixelWidth() / @width
+
+  pixelWidth: ->
+    if @game.width > @game.height
+      @game.width / 2
+    else
+      @game.width
+
+  pixelHeight: ->
+    @game.height
 
 class @DefaultMap extends Map
   constructor: (game) ->
