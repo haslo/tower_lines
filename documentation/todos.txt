@@ -4,7 +4,7 @@ ToDos
 ✓ * Get sprites to draw at all
 ✓ * Get map working (drawing left-half or center, knowing its coordinates)
 ✓ * Get sprites to draw relative to map (with relative coords and scaling)
-  * Build structures for map knowledge (position and direction of towers and mobs)
+✓ * Build structures for map knowledge (position and direction of towers, mobs, paths)
   * Get engine to redraw instead of just draw, prepare for animation, screen resizes, reloads
   * Build pathing algorithms for mobs, get mobs to walk
   * Implement basic shots with basic collision detection (point-based)
