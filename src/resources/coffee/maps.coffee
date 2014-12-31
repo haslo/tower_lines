@@ -21,14 +21,14 @@ class @Map
   clear: (graphics) ->
     graphics.clear() unless @graphics is undefined
 
-  draw: (graphics) ->
+  draw: (graphics, dips) ->
     @clear(graphics)
-    @drawBorder(graphics)
-    @drawPaths(graphics)
-    @drawTowerPlaceholders(graphics)
+    @drawBorder(graphics, dips)
+    @drawPaths(graphics, dips)
+    @drawTowerPlaceholders(graphics, dips)
 
-  drawBorder: (graphics) ->
-    graphics.lineStyle 4, @borderColor, 1
+  drawBorder: (graphics, dips) ->
+    graphics.lineStyle 4 * dips, @borderColor, 1
     graphics.beginFill @borderColor, 0.1
     graphics.moveTo @translateXCoord(@offset),
                     @translateYCoord(@offset)
@@ -42,9 +42,9 @@ class @Map
                     @translateYCoord(@offset)
     graphics.endFill()
 
-  drawPaths: (graphics) ->
+  drawPaths: (graphics, dips) ->
     map = this
-    graphics.lineStyle 4, @pathColor, 0.5
+    graphics.lineStyle 4 * dips, @pathColor, 0.5
     $.each @pathNodes(), (pathIndex, path) ->
       graphics.moveTo map.translateXCoord(path[0][0]),
                       map.translateYCoord(path[0][1])
@@ -53,10 +53,10 @@ class @Map
           graphics.lineTo map.translateXCoord(coord[0]),
                           map.translateYCoord(coord[1])
 
-  drawTowerPlaceholders: (graphics) ->
+  drawTowerPlaceholders: (graphics, dips) ->
     map = this
     $.each @towerPositions(), (index, position) ->
-      new TowerPlaceholderSprite(position[0], position[1]).draw(map, graphics)
+      new TowerPlaceholderSprite(position[0], position[1], dips).draw(map, graphics)
 
   translateCoords: (x, y) ->
     [

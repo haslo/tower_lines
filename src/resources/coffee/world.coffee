@@ -1,6 +1,7 @@
 class @World
-  constructor: (map) ->
+  constructor: (map, dips) ->
     @map = map
+    @dips = dips
     @towers = []
     @mobs = []
 
@@ -24,9 +25,10 @@ class @World
 
   draw: ->
     map = @map
+    dips = @dips
     graphics = map.getGraphics()
-    map.draw(graphics)
+    map.draw(graphics, dips)
     $.each @towers, (_, tower) ->
-      tower.draw(map, graphics)
+      tower.draw(map, graphics, dips)
     $.each @mobs, (_, mob) ->
-      mob.draw(map, graphics)
+      mob.draw(map, graphics, dips)

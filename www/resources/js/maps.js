@@ -34,15 +34,15 @@
       }
     };
 
-    Map.prototype.draw = function(graphics) {
+    Map.prototype.draw = function(graphics, dips) {
       this.clear(graphics);
-      this.drawBorder(graphics);
-      this.drawPaths(graphics);
-      return this.drawTowerPlaceholders(graphics);
+      this.drawBorder(graphics, dips);
+      this.drawPaths(graphics, dips);
+      return this.drawTowerPlaceholders(graphics, dips);
     };
 
-    Map.prototype.drawBorder = function(graphics) {
-      graphics.lineStyle(4, this.borderColor, 1);
+    Map.prototype.drawBorder = function(graphics, dips) {
+      graphics.lineStyle(4 * dips, this.borderColor, 1);
       graphics.beginFill(this.borderColor, 0.1);
       graphics.moveTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
       graphics.lineTo(this.translateXCoord(this.width - this.offset), this.translateYCoord(this.offset));
@@ -52,10 +52,10 @@
       return graphics.endFill();
     };
 
-    Map.prototype.drawPaths = function(graphics) {
+    Map.prototype.drawPaths = function(graphics, dips) {
       var map;
       map = this;
-      graphics.lineStyle(4, this.pathColor, 0.5);
+      graphics.lineStyle(4 * dips, this.pathColor, 0.5);
       return $.each(this.pathNodes(), function(pathIndex, path) {
         graphics.moveTo(map.translateXCoord(path[0][0]), map.translateYCoord(path[0][1]));
         return $.each(path, function(coordIndex, coord) {
@@ -66,11 +66,11 @@
       });
     };
 
-    Map.prototype.drawTowerPlaceholders = function(graphics) {
+    Map.prototype.drawTowerPlaceholders = function(graphics, dips) {
       var map;
       map = this;
       return $.each(this.towerPositions(), function(index, position) {
-        return new TowerPlaceholderSprite(position[0], position[1]).draw(map, graphics);
+        return new TowerPlaceholderSprite(position[0], position[1], dips).draw(map, graphics);
       });
     };
 

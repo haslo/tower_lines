@@ -5,9 +5,10 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   Sprite = (function() {
-    function Sprite(x, y) {
+    function Sprite(x, y, dips) {
       this.x = x;
       this.y = y;
+      this.dips = dips;
     }
 
     Sprite.prototype.moveTo = function(map, graphics, x, y) {
@@ -36,7 +37,7 @@
     TowerPlaceholderSprite.prototype.draw = function(map, graphics) {
       var color;
       color = 0xaa0000;
-      graphics.lineStyle(2, color, 1);
+      graphics.lineStyle(2 * this.dips, color, 1);
       this.moveTo(map, graphics, 9, 9);
       this.lineTo(map, graphics, -9, 9);
       this.lineTo(map, graphics, -9, -9);
@@ -58,7 +59,7 @@
     DefaultTowerSprite.prototype.draw = function(map, graphics) {
       var color;
       color = 0x0000ff;
-      graphics.lineStyle(2, color, 1);
+      graphics.lineStyle(2 * this.dips, color, 1);
       graphics.beginFill(color, 0.4);
       this.moveTo(map, graphics, 10, 10);
       this.lineTo(map, graphics, -10, 10);

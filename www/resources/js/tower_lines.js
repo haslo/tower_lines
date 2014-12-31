@@ -5,7 +5,7 @@
   this.TowerLines = (function() {
     function TowerLines() {
       this.resizeGame = __bind(this.resizeGame, this);
-      this.createListener = __bind(this.createListener, this);
+      this.create = __bind(this.create, this);
       this.onDeviceReady = __bind(this.onDeviceReady, this);
     }
 
@@ -21,11 +21,9 @@
       var dips, height, width;
       width = document.body.offsetWidth;
       height = Math.max($(document).height(), $(window).height());
-      dips = dips = window.devicePixelRatio;
-      console.log(dips);
-      console.log([width, height]);
-      this.game = new Phaser.Game(width, height, Phaser.AUTO, '', {
-        create: this.createListener
+      dips = window.devicePixelRatio;
+      this.game = new Phaser.Game(width * dips, height * dips, Phaser.AUTO, '', {
+        create: this.create
       });
       return $(window).resize((function(_this) {
         return function() {
@@ -34,13 +32,12 @@
       })(this));
     };
 
-    TowerLines.prototype.createListener = function() {
-      console.log([this.game.stage, this.game.scale]);
+    TowerLines.prototype.create = function() {
       this.game.stage.scale.startFullScreen();
       this.game.stage.scaleMode = Phaser.StageScaleMode.EXACT_FIT;
       this.game.stage.scale.setShowAll();
       this.game.stage.scale.refresh();
-      this.world = new World(new DefaultMap(this.game));
+      this.world = new World(new DefaultMap(this.game), window.devicePixelRatio);
       this.world.add(new DefaultTower(0));
       this.world.add(new DefaultTower(1));
       return this.world.draw();
