@@ -1,8 +1,13 @@
 class @Tower
-  constructor: (x, y, map) ->
+  constructor: (index) ->
+    @index = index
+
+  index: ->
+    @index
+
+  setCoords: (x, y) ->
     @x = x
     @y = y
-    @map = map
 
 class @DefaultTower extends Tower
   draw: (map) ->

@@ -12,9 +12,11 @@
         this.map = item;
       }
       if (item instanceof Tower) {
+        this.map.initTower(item, item.index);
         this.towers.push(item);
       }
       if (item instanceof Mob) {
+        this.map.initMob(item, item.index);
         return this.mobs.push(item);
       }
     };

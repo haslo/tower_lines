@@ -4,11 +4,18 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   this.Tower = (function() {
-    function Tower(x, y, map) {
-      this.x = x;
-      this.y = y;
-      this.map = map;
+    function Tower(index) {
+      this.index = index;
     }
+
+    Tower.prototype.index = function() {
+      return this.index;
+    };
+
+    Tower.prototype.setCoords = function(x, y) {
+      this.x = x;
+      return this.y = y;
+    };
 
     return Tower;
 

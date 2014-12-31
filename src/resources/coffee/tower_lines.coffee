@@ -18,7 +18,8 @@ class @TowerLines
 
   createListener: =>
     @world = new World(new DefaultMap(@game))
-    @world.add(new DefaultTower(30, 30))
+    @world.add(new DefaultTower(0))
+    @world.add(new DefaultTower(1))
     @world.draw()
 
   resizeGame: =>

@@ -8,8 +8,10 @@ class @World
     if item instanceof Map
       @map = item
     if item instanceof Tower
+      @map.initTower(item, item.index)
       @towers.push item
     if item instanceof Mob
+      @map.initMob(item, item.index)
       @mobs.push item
 
   update: ->

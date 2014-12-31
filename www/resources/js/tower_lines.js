@@ -34,7 +34,8 @@
 
     TowerLines.prototype.createListener = function() {
       this.world = new World(new DefaultMap(this.game));
-      this.world.add(new DefaultTower(30, 30));
+      this.world.add(new DefaultTower(0));
+      this.world.add(new DefaultTower(1));
       return this.world.draw();
     };
 

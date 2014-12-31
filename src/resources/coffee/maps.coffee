@@ -10,8 +10,23 @@ class @Map
   update: ->
     $.noop
 
+  towerPositions: ->
+    [
+      [30, 30],
+      [105, 50]
+    ]
+
+  initTower: (tower, index) ->
+    coords = @towerPositions()[index]
+    tower.setCoords(coords[0], coords[1])
+
   getGraphics: ->
     @graphics
+
+  draw: ->
+    @clear()
+    @drawBorder()
+    @drawTowerPlaceholders()
 
   drawBorder: ->
     @graphics ||= @game.add.graphics(0, 0)
@@ -28,6 +43,9 @@ class @Map
     @graphics.lineTo @translateXCoord(@offset),
                      @translateYCoord(@offset)
     @graphics.endFill()
+
+  drawTowerPlaceholders: ->
+    $.noop
 
   clear: ->
     @graphics.clear() unless @graphics is undefined
@@ -63,7 +81,3 @@ class @Map
 class @DefaultMap extends Map
   constructor: (game) ->
     super(game, 0xff0000, 200, 300)
-
-  draw: ->
-    @clear()
-    @drawBorder()
