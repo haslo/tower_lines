@@ -349,13 +349,15 @@
     };
 
     TowerLines.prototype.onDeviceReady = function() {
-      var height, listeners, width;
+      var dips, height, width;
       width = document.body.offsetWidth;
       height = Math.max($(document).height(), $(window).height());
-      listeners = {
+      dips = dips = window.devicePixelRatio;
+      console.log(dips);
+      console.log([width, height]);
+      this.game = new Phaser.Game(width, height, Phaser.AUTO, '', {
         create: this.createListener
-      };
-      this.game = new Phaser.Game(width, height, Phaser.AUTO, '', listeners);
+      });
       return $(window).resize((function(_this) {
         return function() {
           return _this.resizeGame(_this);
@@ -364,6 +366,11 @@
     };
 
     TowerLines.prototype.createListener = function() {
+      console.log([this.game.stage, this.game.scale]);
+      this.game.stage.scale.startFullScreen();
+      this.game.stage.scaleMode = Phaser.StageScaleMode.EXACT_FIT;
+      this.game.stage.scale.setShowAll();
+      this.game.stage.scale.refresh();
       this.world = new World(new DefaultMap(this.game));
       this.world.add(new DefaultTower(0));
       this.world.add(new DefaultTower(1));

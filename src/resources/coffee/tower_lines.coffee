@@ -9,14 +9,21 @@ class @TowerLines
   onDeviceReady: =>
     width = document.body.offsetWidth
     height = Math.max($(document).height(), $(window).height())
-    listeners = {
-      create: @createListener
-    }
-    @game = new Phaser.Game(width, height, Phaser.AUTO, '', listeners)
+    dips = dips = window.devicePixelRatio
+    console.log dips
+    console.log [width, height]
+    @game = new Phaser.Game(width * dips, height * dips, Phaser.AUTO, '', {
+      create: @create
+    })
     $(window).resize =>
       @resizeGame(this)
 
-  createListener: =>
+  create: =>
+    console.log [@game.stage, @game.scale]
+    @game.stage.scale.startFullScreen()
+    @game.stage.scaleMode = Phaser.StageScaleMode.EXACT_FIT
+    @game.stage.scale.setShowAll()
+    @game.stage.scale.refresh()
     @world = new World(new DefaultMap(@game))
     @world.add(new DefaultTower(0))
     @world.add(new DefaultTower(1))
