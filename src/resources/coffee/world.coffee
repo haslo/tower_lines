@@ -24,8 +24,9 @@ class @World
 
   draw: ->
     map = @map
-    map.draw()
+    graphics = map.getGraphics()
+    map.draw(graphics)
     $.each @towers, (_, tower) ->
-      tower.draw(map)
+      tower.draw(map, graphics)
     $.each @mobs, (_, mob) ->
-      mob.draw(map)
+      mob.draw(map, graphics)

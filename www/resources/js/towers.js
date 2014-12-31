@@ -28,8 +28,8 @@
       return DefaultTower.__super__.constructor.apply(this, arguments);
     }
 
-    DefaultTower.prototype.draw = function(map) {
-      return new TowerSprite(this.x, this.y).draw(map);
+    DefaultTower.prototype.draw = function(map, graphics) {
+      return new DefaultTowerSprite(this.x, this.y).draw(map, graphics);
     };
 
     return DefaultTower;

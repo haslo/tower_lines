@@ -11,44 +11,42 @@ class @Map
     $.noop
 
   towerPositions: ->
-    [
-      [30, 30],
-      [105, 50]
-    ]
+    []
 
   initTower: (tower, index) ->
     coords = @towerPositions()[index]
     tower.setCoords(coords[0], coords[1])
 
   getGraphics: ->
-    @graphics
-
-  draw: ->
-    @clear()
-    @drawBorder()
-    @drawTowerPlaceholders()
-
-  drawBorder: ->
     @graphics ||= @game.add.graphics(0, 0)
-    @graphics.lineStyle 4, @borderColor, 1
-    @graphics.beginFill @borderColor, 0.1
-    @graphics.moveTo @translateXCoord(@offset),
-                     @translateYCoord(@offset)
-    @graphics.lineTo @translateXCoord(@width - @offset),
-                     @translateYCoord(@offset)
-    @graphics.lineTo @translateXCoord(@width - @offset),
-                     @translateYCoord(@height - @offset)
-    @graphics.lineTo @translateXCoord(@offset),
-                     @translateYCoord(@height - @offset)
-    @graphics.lineTo @translateXCoord(@offset),
-                     @translateYCoord(@offset)
-    @graphics.endFill()
 
-  drawTowerPlaceholders: ->
-    $.noop
+  clear: (graphics) ->
+    graphics.clear() unless @graphics is undefined
 
-  clear: ->
-    @graphics.clear() unless @graphics is undefined
+  draw: (graphics) ->
+    @clear(graphics)
+    @drawBorder(graphics)
+    @drawTowerPlaceholders(graphics)
+
+  drawBorder: (graphics) ->
+    graphics.lineStyle 4, @borderColor, 1
+    graphics.beginFill @borderColor, 0.1
+    graphics.moveTo @translateXCoord(@offset),
+                     @translateYCoord(@offset)
+    graphics.lineTo @translateXCoord(@width - @offset),
+                     @translateYCoord(@offset)
+    graphics.lineTo @translateXCoord(@width - @offset),
+                     @translateYCoord(@height - @offset)
+    graphics.lineTo @translateXCoord(@offset),
+                     @translateYCoord(@height - @offset)
+    graphics.lineTo @translateXCoord(@offset),
+                     @translateYCoord(@offset)
+    graphics.endFill()
+
+  drawTowerPlaceholders: (graphics) ->
+    map = this
+    $.each @towerPositions(), (index, position) ->
+      new TowerPlaceholderSprite(position[0], position[1]).draw(map, graphics)
 
   translateCoords: (x, y) ->
     [
@@ -81,3 +79,14 @@ class @Map
 class @DefaultMap extends Map
   constructor: (game) ->
     super(game, 0xff0000, 200, 300)
+
+  towerPositions: ->
+    [
+      [ 30,  30],
+      [105,  50],
+      [ 60, 100],
+      [170, 140],
+      [140, 180],
+      [ 80, 200],
+      [120, 250]
+    ]

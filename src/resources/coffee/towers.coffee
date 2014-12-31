@@ -10,5 +10,5 @@ class @Tower
     @y = y
 
 class @DefaultTower extends Tower
-  draw: (map) ->
-    new TowerSprite(@x, @y).draw(map)
+  draw: (map, graphics) ->
+    new DefaultTowerSprite(@x, @y).draw(map, graphics)

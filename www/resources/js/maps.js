@@ -18,7 +18,7 @@
     };
 
     Map.prototype.towerPositions = function() {
-      return [[30, 30], [105, 50]];
+      return [];
     };
 
     Map.prototype.initTower = function(tower, index) {
@@ -28,35 +28,38 @@
     };
 
     Map.prototype.getGraphics = function() {
-      return this.graphics;
+      return this.graphics || (this.graphics = this.game.add.graphics(0, 0));
     };
 
-    Map.prototype.draw = function() {
-      this.clear();
-      this.drawBorder();
-      return this.drawTowerPlaceholders();
-    };
-
-    Map.prototype.drawBorder = function() {
-      this.graphics || (this.graphics = this.game.add.graphics(0, 0));
-      this.graphics.lineStyle(4, this.borderColor, 1);
-      this.graphics.beginFill(this.borderColor, 0.1);
-      this.graphics.moveTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
-      this.graphics.lineTo(this.translateXCoord(this.width - this.offset), this.translateYCoord(this.offset));
-      this.graphics.lineTo(this.translateXCoord(this.width - this.offset), this.translateYCoord(this.height - this.offset));
-      this.graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.height - this.offset));
-      this.graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
-      return this.graphics.endFill();
-    };
-
-    Map.prototype.drawTowerPlaceholders = function() {
-      return $.noop;
-    };
-
-    Map.prototype.clear = function() {
+    Map.prototype.clear = function(graphics) {
       if (this.graphics !== void 0) {
-        return this.graphics.clear();
+        return graphics.clear();
       }
+    };
+
+    Map.prototype.draw = function(graphics) {
+      this.clear(graphics);
+      this.drawBorder(graphics);
+      return this.drawTowerPlaceholders(graphics);
+    };
+
+    Map.prototype.drawBorder = function(graphics) {
+      graphics.lineStyle(4, this.borderColor, 1);
+      graphics.beginFill(this.borderColor, 0.1);
+      graphics.moveTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
+      graphics.lineTo(this.translateXCoord(this.width - this.offset), this.translateYCoord(this.offset));
+      graphics.lineTo(this.translateXCoord(this.width - this.offset), this.translateYCoord(this.height - this.offset));
+      graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.height - this.offset));
+      graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
+      return graphics.endFill();
+    };
+
+    Map.prototype.drawTowerPlaceholders = function(graphics) {
+      var map;
+      map = this;
+      return $.each(this.towerPositions(), function(index, position) {
+        return new TowerPlaceholderSprite(position[0], position[1]).draw(map, graphics);
+      });
     };
 
     Map.prototype.translateCoords = function(x, y) {
@@ -103,6 +106,10 @@
     function DefaultMap(game) {
       DefaultMap.__super__.constructor.call(this, game, 0xff0000, 200, 300);
     }
+
+    DefaultMap.prototype.towerPositions = function() {
+      return [[30, 30], [105, 50], [60, 100], [170, 140], [140, 180], [80, 200], [120, 250]];
+    };
 
     return DefaultMap;
 

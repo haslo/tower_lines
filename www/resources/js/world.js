@@ -34,14 +34,15 @@
     };
 
     World.prototype.draw = function() {
-      var map;
+      var graphics, map;
       map = this.map;
-      map.draw();
+      graphics = map.getGraphics();
+      map.draw(graphics);
       $.each(this.towers, function(_, tower) {
-        return tower.draw(map);
+        return tower.draw(map, graphics);
       });
       return $.each(this.mobs, function(_, mob) {
-        return mob.draw(map);
+        return mob.draw(map, graphics);
       });
     };
 

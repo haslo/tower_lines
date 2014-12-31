@@ -1,26 +1,41 @@
 class Sprite
-  moveTo: (map, x, y) ->
-    coords = map.translateCoords(x + @x, y + @y)
-    map.getGraphics().moveTo(coords[0], coords[1])
-
-  lineTo: (map, x, y) ->
-    coords = map.translateCoords(x + @x, y + @y)
-    map.getGraphics().lineTo(coords[0], coords[1])
-
-class @TowerSprite extends Sprite
   constructor: (x, y) ->
     @x = x
     @y = y
 
-  draw: (map) ->
+  moveTo: (map, graphics, x, y) ->
+    coords = map.translateCoords(x + @x, y + @y)
+    graphics.moveTo(coords[0], coords[1])
+
+  lineTo: (map, graphics, x, y) ->
+    coords = map.translateCoords(x + @x, y + @y)
+    graphics.lineTo(coords[0], coords[1])
+
+class @TowerPlaceholderSprite extends Sprite
+  draw: (map, graphics) ->
+    color = 0xaa0000
+    graphics.lineStyle(2, color, 1)
+    @moveTo(map, graphics,  9,  9)
+    @lineTo(map, graphics, -9,  9)
+    @lineTo(map, graphics, -9, -9)
+    @lineTo(map, graphics,  9, -9)
+    @lineTo(map, graphics,  9,  9)
+
+class @DefaultTowerSprite extends Sprite
+  draw: (map, graphics) ->
     color = 0x0000ff
-    map.getGraphics().lineStyle(2, color, 1)
-    map.getGraphics().beginFill(color, 0.4)
-    @moveTo(map,  10,  10)
-    @lineTo(map, -10,  10)
-    @lineTo(map, - 8, - 5)
-    @lineTo(map, - 8, -10)
-    @lineTo(map,   8, -10)
-    @lineTo(map,   8, - 5)
-    @lineTo(map,  10,  10)
-    map.getGraphics().endFill()
+    graphics.lineStyle(2, color, 1)
+    graphics.beginFill(color, 0.4)
+    @moveTo(map, graphics,  10,  10)
+    @lineTo(map, graphics, -10,  10)
+    @lineTo(map, graphics, - 8, - 5)
+    @lineTo(map, graphics, - 8, -10)
+
+    @lineTo(map, graphics, - 2, -10)
+    @lineTo(map, graphics,   0, -13)
+    @lineTo(map, graphics,   2, -10)
+
+    @lineTo(map, graphics,   8, -10)
+    @lineTo(map, graphics,   8, - 5)
+    @lineTo(map, graphics,  10,  10)
+    graphics.endFill()

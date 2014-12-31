@@ -5,48 +5,75 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   Sprite = (function() {
-    function Sprite() {}
+    function Sprite(x, y) {
+      this.x = x;
+      this.y = y;
+    }
 
-    Sprite.prototype.moveTo = function(map, x, y) {
+    Sprite.prototype.moveTo = function(map, graphics, x, y) {
       var coords;
       coords = map.translateCoords(x + this.x, y + this.y);
-      return map.getGraphics().moveTo(coords[0], coords[1]);
+      return graphics.moveTo(coords[0], coords[1]);
     };
 
-    Sprite.prototype.lineTo = function(map, x, y) {
+    Sprite.prototype.lineTo = function(map, graphics, x, y) {
       var coords;
       coords = map.translateCoords(x + this.x, y + this.y);
-      return map.getGraphics().lineTo(coords[0], coords[1]);
+      return graphics.lineTo(coords[0], coords[1]);
     };
 
     return Sprite;
 
   })();
 
-  this.TowerSprite = (function(_super) {
-    __extends(TowerSprite, _super);
+  this.TowerPlaceholderSprite = (function(_super) {
+    __extends(TowerPlaceholderSprite, _super);
 
-    function TowerSprite(x, y) {
-      this.x = x;
-      this.y = y;
+    function TowerPlaceholderSprite() {
+      return TowerPlaceholderSprite.__super__.constructor.apply(this, arguments);
     }
 
-    TowerSprite.prototype.draw = function(map) {
+    TowerPlaceholderSprite.prototype.draw = function(map, graphics) {
       var color;
-      color = 0x0000ff;
-      map.getGraphics().lineStyle(2, color, 1);
-      map.getGraphics().beginFill(color, 0.4);
-      this.moveTo(map, 10, 10);
-      this.lineTo(map, -10, 10);
-      this.lineTo(map, -8, -5);
-      this.lineTo(map, -8, -10);
-      this.lineTo(map, 8, -10);
-      this.lineTo(map, 8, -5);
-      this.lineTo(map, 10, 10);
-      return map.getGraphics().endFill();
+      color = 0xaa0000;
+      graphics.lineStyle(2, color, 1);
+      this.moveTo(map, graphics, 9, 9);
+      this.lineTo(map, graphics, -9, 9);
+      this.lineTo(map, graphics, -9, -9);
+      this.lineTo(map, graphics, 9, -9);
+      return this.lineTo(map, graphics, 9, 9);
     };
 
-    return TowerSprite;
+    return TowerPlaceholderSprite;
+
+  })(Sprite);
+
+  this.DefaultTowerSprite = (function(_super) {
+    __extends(DefaultTowerSprite, _super);
+
+    function DefaultTowerSprite() {
+      return DefaultTowerSprite.__super__.constructor.apply(this, arguments);
+    }
+
+    DefaultTowerSprite.prototype.draw = function(map, graphics) {
+      var color;
+      color = 0x0000ff;
+      graphics.lineStyle(2, color, 1);
+      graphics.beginFill(color, 0.4);
+      this.moveTo(map, graphics, 10, 10);
+      this.lineTo(map, graphics, -10, 10);
+      this.lineTo(map, graphics, -8, -5);
+      this.lineTo(map, graphics, -8, -10);
+      this.lineTo(map, graphics, -2, -10);
+      this.lineTo(map, graphics, 0, -13);
+      this.lineTo(map, graphics, 2, -10);
+      this.lineTo(map, graphics, 8, -10);
+      this.lineTo(map, graphics, 8, -5);
+      this.lineTo(map, graphics, 10, 10);
+      return graphics.endFill();
+    };
+
+    return DefaultTowerSprite;
 
   })(Sprite);
 
