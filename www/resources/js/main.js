@@ -89,9 +89,10 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   this.Map = (function() {
-    function Map(game, borderColor, width, height) {
+    function Map(game, borderColor, pathColor, width, height) {
       this.game = game;
       this.borderColor = borderColor;
+      this.pathColor = pathColor;
       this.width = width;
       this.height = height;
       this.aspectRatio = this.width / this.height;
@@ -100,10 +101,6 @@
 
     Map.prototype.update = function() {
       return $.noop;
-    };
-
-    Map.prototype.towerPositions = function() {
-      return [];
     };
 
     Map.prototype.initTower = function(tower, index) {
@@ -125,6 +122,7 @@
     Map.prototype.draw = function(graphics) {
       this.clear(graphics);
       this.drawBorder(graphics);
+      this.drawPaths(graphics);
       return this.drawTowerPlaceholders(graphics);
     };
 
@@ -137,6 +135,20 @@
       graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.height - this.offset));
       graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
       return graphics.endFill();
+    };
+
+    Map.prototype.drawPaths = function(graphics) {
+      var map;
+      map = this;
+      graphics.lineStyle(4, this.pathColor, 0.5);
+      return $.each(this.pathNodes(), function(pathIndex, path) {
+        graphics.moveTo(map.translateXCoord(path[0][0]), map.translateYCoord(path[0][1]));
+        return $.each(path, function(coordIndex, coord) {
+          if (coordIndex !== 0) {
+            return graphics.lineTo(map.translateXCoord(coord[0]), map.translateYCoord(coord[1]));
+          }
+        });
+      });
     };
 
     Map.prototype.drawTowerPlaceholders = function(graphics) {
@@ -189,11 +201,15 @@
     __extends(DefaultMap, _super);
 
     function DefaultMap(game) {
-      DefaultMap.__super__.constructor.call(this, game, 0xff0000, 200, 300);
+      DefaultMap.__super__.constructor.call(this, game, 0xff0000, 0x00ff00, 200, 300);
     }
 
     DefaultMap.prototype.towerPositions = function() {
-      return [[30, 30], [105, 50], [60, 100], [170, 140], [140, 180], [80, 200], [120, 250]];
+      return [[35, 30], [90, 50], [50, 100], [170, 130], [50, 180], [100, 185], [120, 245]];
+    };
+
+    DefaultMap.prototype.pathNodes = function() {
+      return [[[50, 2], [70, 60], [25, 70], [30, 171], [40, 252], [145, 271], [165, 298]], [[198, 50], [170, 100], [27, 170], [42, 250], [151, 270], [160, 298]]];
     };
 
     return DefaultMap;

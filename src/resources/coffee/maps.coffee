@@ -1,7 +1,8 @@
 class @Map
-  constructor: (game, borderColor, width, height) ->
+  constructor: (game, borderColor, pathColor, width, height) ->
     @game = game
     @borderColor = borderColor
+    @pathColor = pathColor
     @width = width
     @height = height
     @aspectRatio = @width / @height
@@ -9,9 +10,6 @@ class @Map
 
   update: ->
     $.noop
-
-  towerPositions: ->
-    []
 
   initTower: (tower, index) ->
     coords = @towerPositions()[index]
@@ -26,22 +24,34 @@ class @Map
   draw: (graphics) ->
     @clear(graphics)
     @drawBorder(graphics)
+    @drawPaths(graphics)
     @drawTowerPlaceholders(graphics)
 
   drawBorder: (graphics) ->
     graphics.lineStyle 4, @borderColor, 1
     graphics.beginFill @borderColor, 0.1
     graphics.moveTo @translateXCoord(@offset),
-                     @translateYCoord(@offset)
+                    @translateYCoord(@offset)
     graphics.lineTo @translateXCoord(@width - @offset),
-                     @translateYCoord(@offset)
+                    @translateYCoord(@offset)
     graphics.lineTo @translateXCoord(@width - @offset),
-                     @translateYCoord(@height - @offset)
+                    @translateYCoord(@height - @offset)
     graphics.lineTo @translateXCoord(@offset),
-                     @translateYCoord(@height - @offset)
+                    @translateYCoord(@height - @offset)
     graphics.lineTo @translateXCoord(@offset),
-                     @translateYCoord(@offset)
+                    @translateYCoord(@offset)
     graphics.endFill()
+
+  drawPaths: (graphics) ->
+    map = this
+    graphics.lineStyle 4, @pathColor, 0.5
+    $.each @pathNodes(), (pathIndex, path) ->
+      graphics.moveTo map.translateXCoord(path[0][0]),
+                      map.translateYCoord(path[0][1])
+      $.each path, (coordIndex, coord) ->
+        if coordIndex != 0
+          graphics.lineTo map.translateXCoord(coord[0]),
+                          map.translateYCoord(coord[1])
 
   drawTowerPlaceholders: (graphics) ->
     map = this
@@ -78,15 +88,36 @@ class @Map
 
 class @DefaultMap extends Map
   constructor: (game) ->
-    super(game, 0xff0000, 200, 300)
+    super(game, 0xff0000, 0x00ff00, 200, 300)
 
   towerPositions: ->
     [
-      [ 30,  30],
-      [105,  50],
-      [ 60, 100],
-      [170, 140],
-      [140, 180],
-      [ 80, 200],
-      [120, 250]
+      [ 35,  30],
+      [ 90,  50],
+      [ 50, 100],
+      [170, 130],
+      [ 50, 180],
+      [100, 185],
+      [120, 245]
+    ]
+
+  pathNodes: ->
+    [
+      [
+        [ 50,   2],
+        [ 70,  60],
+        [ 25,  70],
+        [ 30, 171],
+        [ 40, 252],
+        [145, 271],
+        [165, 298],
+      ],
+      [
+        [198,  50],
+        [170, 100]
+        [ 27, 170],
+        [ 42, 250],
+        [151, 270],
+        [160, 298],
+      ]
     ]
