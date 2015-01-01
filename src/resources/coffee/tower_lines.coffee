@@ -15,17 +15,6 @@ class @TowerLines
     })
     $(window).resize =>
       @resizeGame(this)
-
-  create: =>
-    @game.stage.scale.startFullScreen()
-    @game.stage.scaleMode = Phaser.StageScaleMode.EXACT_FIT
-    @game.stage.scale.setShowAll()
-    @game.stage.scale.refresh()
-    @world = new World(new DefaultMap(@game), window.devicePixelRatio)
-    @world.add(new DefaultTower(0))
-    @world.add(new DefaultTower(1))
-    @world.draw()
-
   resizeGame: =>
     height = $(window).height()
     width = $(window).width()
@@ -35,4 +24,20 @@ class @TowerLines
     @game.stage.bounds.height = height
     if @game.renderType is Phaser.WEBGL
       @game.renderer.resize width, height
+    @world.draw()
+
+  create: =>
+    @initGame()
+    @initWorld()
+  initGame: =>
+    @game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
+    @game.scale.setShowAll()
+    @game.physics.startSystem(Phaser.Physics.ARCADE)
+    callback = (scale, prevOrientation) ->
+      alert prevOrientation
+    @game.scale.onOrientationChange.add(callback)
+  initWorld: =>
+    @world = new World(new DefaultMap(@game), window.devicePixelRatio)
+    @world.add(new DefaultTower(0))
+    @world.add(new DefaultTower(1))
     @world.draw()

@@ -338,8 +338,10 @@
 
   this.TowerLines = (function() {
     function TowerLines() {
-      this.resizeGame = __bind(this.resizeGame, this);
+      this.initWorld = __bind(this.initWorld, this);
+      this.initGame = __bind(this.initGame, this);
       this.create = __bind(this.create, this);
+      this.resizeGame = __bind(this.resizeGame, this);
       this.onDeviceReady = __bind(this.onDeviceReady, this);
     }
 
@@ -366,17 +368,6 @@
       })(this));
     };
 
-    TowerLines.prototype.create = function() {
-      this.game.stage.scale.startFullScreen();
-      this.game.stage.scaleMode = Phaser.StageScaleMode.EXACT_FIT;
-      this.game.stage.scale.setShowAll();
-      this.game.stage.scale.refresh();
-      this.world = new World(new DefaultMap(this.game), window.devicePixelRatio);
-      this.world.add(new DefaultTower(0));
-      this.world.add(new DefaultTower(1));
-      return this.world.draw();
-    };
-
     TowerLines.prototype.resizeGame = function() {
       var height, width;
       height = $(window).height();
@@ -388,6 +379,29 @@
       if (this.game.renderType === Phaser.WEBGL) {
         this.game.renderer.resize(width, height);
       }
+      return this.world.draw();
+    };
+
+    TowerLines.prototype.create = function() {
+      this.initGame();
+      return this.initWorld();
+    };
+
+    TowerLines.prototype.initGame = function() {
+      var callback;
+      this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+      this.game.scale.setShowAll();
+      this.game.physics.startSystem(Phaser.Physics.ARCADE);
+      callback = function(scale, prevOrientation) {
+        return alert(prevOrientation);
+      };
+      return this.game.scale.onOrientationChange.add(callback);
+    };
+
+    TowerLines.prototype.initWorld = function() {
+      this.world = new World(new DefaultMap(this.game), window.devicePixelRatio);
+      this.world.add(new DefaultTower(0));
+      this.world.add(new DefaultTower(1));
       return this.world.draw();
     };
 

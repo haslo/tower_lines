@@ -1,5 +1,6 @@
-ToDos
-===
+# ToDos
+
+## Basic Engine
 
 ✓ * Get sprites to draw at all
 ✓ * Get map working (drawing left-half or center, knowing its coordinates)
@@ -14,3 +15,10 @@ ToDos
   * Prepare offscreen rendering and multiple PIXI graphics
   * Use in-engine structures for rendering tree where possible (for optimization)
   * Make it possible to draw images instead of line art
+
+## Further progress
+
+  * Conceptualize framework for server communication
+  * Conceptualize menu framework
+  * Conceptualize framework for planning "programs"
+  * Conceptualize player progress and tutorials
