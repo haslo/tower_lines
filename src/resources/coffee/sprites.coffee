@@ -31,11 +31,9 @@ class @DefaultTowerSprite extends Sprite
     @lineTo(map, graphics, -10,  10)
     @lineTo(map, graphics, - 8, - 5)
     @lineTo(map, graphics, - 8, -10)
-
     @lineTo(map, graphics, - 2, -10)
     @lineTo(map, graphics,   0, -13)
     @lineTo(map, graphics,   2, -10)
-
     @lineTo(map, graphics,   8, -10)
     @lineTo(map, graphics,   8, - 5)
     @lineTo(map, graphics,  10,  10)

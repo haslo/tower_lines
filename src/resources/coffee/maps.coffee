@@ -56,7 +56,8 @@ class @Map
   drawTowerPlaceholders: (graphics, dips) ->
     map = this
     $.each @towerPositions(), (index, position) ->
-      new TowerPlaceholderSprite(position[0], position[1], dips).draw(map, graphics)
+      sprite = new TowerPlaceholderSprite(position[0], position[1], dips)
+      sprite.draw(map, graphics)
 
   translateCoords: (x, y) ->
     [
