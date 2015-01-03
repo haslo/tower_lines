@@ -20,8 +20,6 @@ class @TowerLines
     width = $(window).width()
     @game.width = width
     @game.height = height
-    @game.stage.bounds.width = width
-    @game.stage.bounds.height = height
     if @game.renderType is Phaser.WEBGL
       @game.renderer.resize width, height
     @world.draw()

@@ -40,8 +40,6 @@
       width = $(window).width();
       this.game.width = width;
       this.game.height = height;
-      this.game.stage.bounds.width = width;
-      this.game.stage.bounds.height = height;
       if (this.game.renderType === Phaser.WEBGL) {
         this.game.renderer.resize(width, height);
       }

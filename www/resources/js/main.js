@@ -156,7 +156,9 @@
       var map;
       map = this;
       return $.each(this.towerPositions(), function(index, position) {
-        return new TowerPlaceholderSprite(position[0], position[1], dips).draw(map, graphics);
+        var sprite;
+        sprite = new TowerPlaceholderSprite(position[0], position[1], dips);
+        return sprite.draw(map, graphics);
       });
     };
 
@@ -374,8 +376,6 @@
       width = $(window).width();
       this.game.width = width;
       this.game.height = height;
-      this.game.stage.bounds.width = width;
-      this.game.stage.bounds.height = height;
       if (this.game.renderType === Phaser.WEBGL) {
         this.game.renderer.resize(width, height);
       }

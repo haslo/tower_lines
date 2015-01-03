@@ -70,7 +70,9 @@
       var map;
       map = this;
       return $.each(this.towerPositions(), function(index, position) {
-        return new TowerPlaceholderSprite(position[0], position[1], dips).draw(map, graphics);
+        var sprite;
+        sprite = new TowerPlaceholderSprite(position[0], position[1], dips);
+        return sprite.draw(map, graphics);
       });
     };
 
