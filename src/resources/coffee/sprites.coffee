@@ -4,14 +4,6 @@ class Sprite
     @y = y
     @dips = dips
 
-  moveTo: (map, graphics, x, y) ->
-    coords = map.translateCoords(x + @x, y + @y)
-    graphics.moveTo(coords[0], coords[1])
-
-  lineTo: (map, graphics, x, y) ->
-    coords = map.translateCoords(x + @x, y + @y)
-    graphics.lineTo(coords[0], coords[1])
-
 class @TowerPlaceholderSprite extends Sprite
   draw: (map, graphics) ->
     color = 0xaa0000

@@ -24,18 +24,7 @@
       return tower.setCoords(coords[0], coords[1]);
     };
 
-    Map.prototype.getGraphics = function() {
-      return this.graphics || (this.graphics = this.game.add.graphics(0, 0));
-    };
-
-    Map.prototype.clear = function(graphics) {
-      if (this.graphics !== void 0) {
-        return graphics.clear();
-      }
-    };
-
     Map.prototype.draw = function(graphics, dips) {
-      this.clear(graphics);
       this.drawBorder(graphics, dips);
       this.drawPaths(graphics, dips);
       return this.drawTowerPlaceholders(graphics, dips);
@@ -44,11 +33,11 @@
     Map.prototype.drawBorder = function(graphics, dips) {
       graphics.lineStyle(4 * dips, this.borderColor, 1);
       graphics.beginFill(this.borderColor, 0.1);
-      graphics.moveTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
-      graphics.lineTo(this.translateXCoord(this.width - this.offset), this.translateYCoord(this.offset));
-      graphics.lineTo(this.translateXCoord(this.width - this.offset), this.translateYCoord(this.height - this.offset));
-      graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.height - this.offset));
-      graphics.lineTo(this.translateXCoord(this.offset), this.translateYCoord(this.offset));
+      graphics.moveTo(this.translateX(this.offset), this.translateY(this.offset));
+      graphics.lineTo(this.translateX(this.width - this.offset), this.translateY(this.offset));
+      graphics.lineTo(this.translateX(this.width - this.offset), this.translateY(this.height - this.offset));
+      graphics.lineTo(this.translateX(this.offset), this.translateY(this.height - this.offset));
+      graphics.lineTo(this.translateX(this.offset), this.translateY(this.offset));
       return graphics.endFill();
     };
 
@@ -57,10 +46,10 @@
       map = this;
       graphics.lineStyle(4 * dips, this.pathColor, 0.5);
       return $.each(this.pathNodes(), function(pathIndex, path) {
-        graphics.moveTo(map.translateXCoord(path[0][0]), map.translateYCoord(path[0][1]));
+        graphics.moveTo(map.translateX(path[0][0]), map.translateY(path[0][1]));
         return $.each(path, function(coordIndex, coord) {
           if (coordIndex !== 0) {
-            return graphics.lineTo(map.translateXCoord(coord[0]), map.translateYCoord(coord[1]));
+            return graphics.lineTo(map.translateX(coord[0]), map.translateY(coord[1]));
           }
         });
       });
@@ -77,14 +66,14 @@
     };
 
     Map.prototype.translateCoords = function(x, y) {
-      return [this.translateXCoord(x), this.translateYCoord(y)];
+      return [this.translateX(x), this.translateY(y)];
     };
 
-    Map.prototype.translateXCoord = function(coord) {
+    Map.prototype.translateX = function(coord) {
       return coord * this.pixelScale() + (this.pixelWidth() - this.width * this.pixelScale()) / 2;
     };
 
-    Map.prototype.translateYCoord = function(coord) {
+    Map.prototype.translateY = function(coord) {
       return coord * this.pixelScale() + (this.pixelHeight() - this.height * this.pixelScale()) / 2;
     };
 

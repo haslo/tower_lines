@@ -11,18 +11,6 @@
       this.dips = dips;
     }
 
-    Sprite.prototype.moveTo = function(map, graphics, x, y) {
-      var coords;
-      coords = map.translateCoords(x + this.x, y + this.y);
-      return graphics.moveTo(coords[0], coords[1]);
-    };
-
-    Sprite.prototype.lineTo = function(map, graphics, x, y) {
-      var coords;
-      coords = map.translateCoords(x + this.x, y + this.y);
-      return graphics.lineTo(coords[0], coords[1]);
-    };
-
     return Sprite;
 
   })();

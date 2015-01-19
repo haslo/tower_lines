@@ -1,19 +1,19 @@
 class @World
-  constructor: (map, dips) ->
+  constructor: (game, map, dips) ->
+    @game = game
     @map = map
     @dips = dips
     @towers = []
     @mobs = []
 
   add: (item) ->
-    if item instanceof Map
-      @map = item
     if item instanceof Tower
       @map.initTower(item, item.index)
       @towers.push item
     if item instanceof Mob
       @map.initMob(item, item.index)
       @mobs.push item
+    item.map = @map
 
   update: ->
     map = @map
@@ -26,9 +26,8 @@ class @World
   draw: ->
     map = @map
     dips = @dips
-    graphics = map.getGraphics()
-    map.draw(graphics, dips)
+    map.draw(dips)
     $.each @towers, (_, tower) ->
-      tower.draw(map, graphics, dips)
+      tower.draw(dips)
     $.each @mobs, (_, mob) ->
-      mob.draw(map, graphics, dips)
+      mob.draw(dips)

@@ -18,10 +18,12 @@ class @TowerLines
   resizeGame: =>
     height = $(window).height()
     width = $(window).width()
-    @game.width = width
-    @game.height = height
+    dips = window.devicePixelRatio
+    @game.width = width * dips
+    @game.height = height * dips
     if @game.renderType is Phaser.WEBGL
-      @game.renderer.resize width, height
+      @game.renderer.resize(width * dips, height * dips)
+    @world.invalidateCaches()
     @world.draw()
 
   create: =>
@@ -35,7 +37,7 @@ class @TowerLines
       alert prevOrientation
     @game.scale.onOrientationChange.add(callback)
   initWorld: =>
-    @world = new World(new DefaultMap(@game), window.devicePixelRatio)
+    @world = new World(@game, new DefaultMap(@game), window.devicePixelRatio)
     @world.add(new DefaultTower(0))
     @world.add(new DefaultTower(1))
     @world.draw()

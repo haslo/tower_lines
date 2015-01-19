@@ -15,14 +15,7 @@ class @Map
     coords = @towerPositions()[index]
     tower.setCoords(coords[0], coords[1])
 
-  getGraphics: ->
-    @graphics ||= @game.add.graphics(0, 0)
-
-  clear: (graphics) ->
-    graphics.clear() unless @graphics is undefined
-
   draw: (graphics, dips) ->
-    @clear(graphics)
     @drawBorder(graphics, dips)
     @drawPaths(graphics, dips)
     @drawTowerPlaceholders(graphics, dips)
@@ -30,28 +23,28 @@ class @Map
   drawBorder: (graphics, dips) ->
     graphics.lineStyle 4 * dips, @borderColor, 1
     graphics.beginFill @borderColor, 0.1
-    graphics.moveTo @translateXCoord(@offset),
-                    @translateYCoord(@offset)
-    graphics.lineTo @translateXCoord(@width - @offset),
-                    @translateYCoord(@offset)
-    graphics.lineTo @translateXCoord(@width - @offset),
-                    @translateYCoord(@height - @offset)
-    graphics.lineTo @translateXCoord(@offset),
-                    @translateYCoord(@height - @offset)
-    graphics.lineTo @translateXCoord(@offset),
-                    @translateYCoord(@offset)
+    graphics.moveTo @translateX(@offset),
+                    @translateY(@offset)
+    graphics.lineTo @translateX(@width - @offset),
+                    @translateY(@offset)
+    graphics.lineTo @translateX(@width - @offset),
+                    @translateY(@height - @offset)
+    graphics.lineTo @translateX(@offset),
+                    @translateY(@height - @offset)
+    graphics.lineTo @translateX(@offset),
+                    @translateY(@offset)
     graphics.endFill()
 
   drawPaths: (graphics, dips) ->
     map = this
     graphics.lineStyle 4 * dips, @pathColor, 0.5
     $.each @pathNodes(), (pathIndex, path) ->
-      graphics.moveTo map.translateXCoord(path[0][0]),
-                      map.translateYCoord(path[0][1])
+      graphics.moveTo map.translateX(path[0][0]),
+                      map.translateY(path[0][1])
       $.each path, (coordIndex, coord) ->
         if coordIndex != 0
-          graphics.lineTo map.translateXCoord(coord[0]),
-                          map.translateYCoord(coord[1])
+          graphics.lineTo map.translateX(coord[0]),
+                          map.translateY(coord[1])
 
   drawTowerPlaceholders: (graphics, dips) ->
     map = this
@@ -61,14 +54,14 @@ class @Map
 
   translateCoords: (x, y) ->
     [
-      @translateXCoord(x),
-      @translateYCoord(y)
+      @translateX(x),
+      @translateY(y)
     ]
 
-  translateXCoord: (coord) ->
+  translateX: (coord) ->
     coord * @pixelScale() + (@pixelWidth() - @width * @pixelScale()) / 2
 
-  translateYCoord: (coord) ->
+  translateY: (coord) ->
     coord * @pixelScale() + (@pixelHeight() - @height * @pixelScale()) / 2
 
   pixelScale: ->

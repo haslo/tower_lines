@@ -35,14 +35,16 @@
     };
 
     TowerLines.prototype.resizeGame = function() {
-      var height, width;
+      var dips, height, width;
       height = $(window).height();
       width = $(window).width();
-      this.game.width = width;
-      this.game.height = height;
+      dips = window.devicePixelRatio;
+      this.game.width = width * dips;
+      this.game.height = height * dips;
       if (this.game.renderType === Phaser.WEBGL) {
-        this.game.renderer.resize(width, height);
+        this.game.renderer.resize(width * dips, height * dips);
       }
+      this.world.invalidateCaches();
       return this.world.draw();
     };
 
@@ -63,7 +65,7 @@
     };
 
     TowerLines.prototype.initWorld = function() {
-      this.world = new World(new DefaultMap(this.game), window.devicePixelRatio);
+      this.world = new World(this.game, new DefaultMap(this.game), window.devicePixelRatio);
       this.world.add(new DefaultTower(0));
       this.world.add(new DefaultTower(1));
       return this.world.draw();
